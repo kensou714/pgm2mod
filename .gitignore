@@ -1,0 +1,16 @@
+src/patch.S
+obj
+build
+*.u7
+*.bin
+*.zip
+*.rar
+*.bak
+*.BAK
+*~
+.~
+
+#
+# git files that we don't want to ignore even it they are dot-files
+#
+!.gitignore
