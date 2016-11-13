@@ -42,3 +42,7 @@
 	XXPATCH16PTR32(0x1011AE4C,EquipDuraTableMod)
 	XXPATCH16PTR32(0x1011BAAC,EquipDuraTableMod)
 	XXPATCH16PTR32(0x1011BF2C,EquipDuraTableMod)
+	
+	//这里修改了游戏开卡时的赠送道具表，改了1处引用指针
+	XXPATCH16PTR32(0x1000F6C4,NewCardOrgItemTableMod)	
+	
