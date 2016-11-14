@@ -27,7 +27,7 @@ void CreatMapObj(int a1,int a2,int a3,int a4,int a5,short MapPal,short a7,short 
 
 signed int Stage0Motion0Begin()
 {
-  short MapPal; // r5@1
+//  short MapPal; // r5@1
 
   Music_Stop();//停止音乐
   sub_10022984();//V8(0x200200C7)=0;
@@ -37,13 +37,14 @@ signed int Stage0Motion0Begin()
   LoadMapBit(0x10187048, 0);//载入地图 0层
   LoadMapBit(0x10183C10, 1);//载入地图 1层
   LoadMapMask(0x1019A544, 0, 160);//载入地图的Mask
-  MapPal = SetMapBitPal(0x104F2EAC, 0, 0, 0);//载入地图的色盘
-  CreatMapObj(0x1033EB70,117,0,167,1,MapPal,-2,0,1,7,6);//创建地图用的背景OBJ喷泉那些
-  CreatMapObj(0x1033EB70,553,0,187,0,MapPal,-2,0,1,7,6);
-  CreatMapObj(0x1033EBC4,820,0,187,0,MapPal,-2,0,1,7,6);
-  CreatMapObj(0x1033EB70,956,0,167,0,MapPal,-2,0,1,7,6);
-  CreatMapObj(0x1033EBC4,1223,0,167,0,MapPal,-2,0,1,7,6);
-  CreatMapObj(0x1033EB70,1397,0,167,0,MapPal,-2,0,1,7,6);
+  SetMapBitPal(0x104F2EAC, 0, 0, 0);
+ // MapPal = SetMapBitPal(0x104F2EAC, 0, 0, 0);//载入地图的色盘
+//  CreatMapObj(0x1033EB70,117,0,167,1,MapPal,-2,0,1,7,6);//创建地图用的背景OBJ喷泉那些
+//  CreatMapObj(0x1033EB70,553,0,187,0,MapPal,-2,0,1,7,6);
+//  CreatMapObj(0x1033EBC4,820,0,187,0,MapPal,-2,0,1,7,6);
+//  CreatMapObj(0x1033EB70,956,0,167,0,MapPal,-2,0,1,7,6);
+//  CreatMapObj(0x1033EBC4,1223,0,167,0,MapPal,-2,0,1,7,6);
+//  CreatMapObj(0x1033EB70,1397,0,167,0,MapPal,-2,0,1,7,6);
 
   sub_1004FBE2(270, 6, 0, 0);//这里也是色盘有关
   sub_1004FF3C();//这里也是色盘有关
@@ -104,7 +105,7 @@ int Stage0Motion0Turn()
     sub_100BE008();
     sub_100207FA();
     sub_10022984();
-    sub_100BE02E();
+    sub_100BE02E();//这个是关卡设定的函数
     sub_100BE4E8();
     sub_100207F0();
     sub_1002297C();
@@ -135,12 +136,12 @@ int Stage0Motion0Other(int a1)
   return result;
 }
 
-int Stage0Motion0BeforeEnd(int a1)
+int Stage0Motion0BeforeEnd(int pPlayerCmdObj)
 {
-  short v1; // r5@1
-
-  v1 = V8(V32(a1 + 260) + 1);
-  return sub_1002A7CA(a1, 5 * v1 + 50, 5 * v1 + 180, 0, 0, 2, 0);
+  short PlayerNo; // r5@1
+  //pgm2log("%08X\n",a1);
+  PlayerNo = V8(V32(pPlayerCmdObj + 260) + 1);
+  return sub_1002A7CA(pPlayerCmdObj, 5 * PlayerNo + 50, 5 * PlayerNo + 180, 0, 0, 2, 0);
 }
 
 
