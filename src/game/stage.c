@@ -65,8 +65,8 @@ extern int st0_getmotionnull(int Motion);
 
 const int StageTblMod[]={
 1, 0x100BDF6D, 0x100BDF71, 0x100BDF81, 0x100BDF93, 0x100BDFA5, 0x100BDFBB, 0x100BDFD1, 0x100BDFE7, 0x100BDFF5, //test stage
-1, (int)(&st0_init+1), (int)(&st0_getmotionbegin+1), (int)(&st0_getmotionturn+1), (int)(&st0_getmotionend+1), (int)(&st0_getmotiondrop+1), (int)(&st0_getmotionother+1), (int)(&st0_getmotionbeforeend+1), (int)(&st0_getmotiontime+1), (int)(&st0_getmotionnull+1), //test stage
-//4, 0x100BEDB9, 0x100BEEB3, 0x100BEEC3, 0x100BEED5, 0x100BEEE7, 0x100BEEFD, 0x100BEF13, 0x100BEF29, 0x100BEF37, //stage1 随机新手关
+//1, (int)(&st0_init+1), (int)(&st0_getmotionbegin+1), (int)(&st0_getmotionturn+1), (int)(&st0_getmotionend+1), (int)(&st0_getmotiondrop+1), (int)(&st0_getmotionother+1), (int)(&st0_getmotionbeforeend+1), (int)(&st0_getmotiontime+1), (int)(&st0_getmotionnull+1), //test stage
+4, 0x100BEDB9, 0x100BEEB3, 0x100BEEC3, 0x100BEED5, 0x100BEEE7, 0x100BEEFD, 0x100BEF13, 0x100BEF29, 0x100BEF37, //stage1 随机新手关
 5, 0x100C5A11, 0x100C5A19, 0x100C5A29, 0x100C5A3B, 0x100C5A4D, 0x100C5A63, 0x100C5A79, 0x100C5A8F, 0x100C5A9D,//stage2	平顶山
 6, 0x100CE095, 0x100CE0AD, 0x100CE0BD, 0x100CE0CF, 0x100CE0E1, 0x100CE0F7, 0x100CE10D, 0x100CE123, 0x100CE131, //stage3 车迟国
 4, 0x100D87D1, 0x100D87D5, 0x100D87E5, 0x100D87F7, 0x100D8809, 0x100D881F, 0x100D8835, 0x100D884B, 0x100D8859, //stage4 碗子山

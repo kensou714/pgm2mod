@@ -6,6 +6,8 @@
 //MOD装备属性参数表开关
 #define EN_MOD_EQUIPATTRTABLE 1
 
+//分数奖命和升级开关
+#define EN_MOD_LEVELUP	1
 
 
 
