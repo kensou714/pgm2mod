@@ -49,15 +49,15 @@ typedef struct ROLE_CMD ROLE_CMD;
 typedef struct IC_CARD IC_CARD;
 struct __attribute__((aligned(4))) ROLE_MEM
 {
-  char Status;
-  char PlayerNo;
+  char Status;//0
+  char PlayerNo;//
   char RoleId;
   char Lifes;
   ROLE_CMD *pCmdPtr;
   char DWORD_8;
-  __int16 WORD_12;
-  __int16 WORD_14;
-  int DWORD_16;
+  __int16 WORD_9;
+  __int16 WORD_11;
+  int DWORD_13;
   char Name[8];
   __int16 x;
   __int16 y;
@@ -121,7 +121,7 @@ struct __attribute__((aligned(4))) ROLE_MEM
   __int16 Cash;
   char BYTE_202;
   char BYTE_203;
-  int NowEXP;
+  signed int NowEXP;
   char BYTE_208;
   char BYTE_209;
   char Level;
@@ -129,7 +129,7 @@ struct __attribute__((aligned(4))) ROLE_MEM
   char BYTE_212;
   char BYTE_213;
   __int16 WORD_214;
-  int NextEXP;
+  signed int NextEXP;
   char HPMax;
   char HPBarValue;
   __int16 WORD_222;
@@ -176,6 +176,7 @@ struct __attribute__((aligned(4))) ROLE_MEM
   char BYTE_290;
   char BYTE_291;
 };
+
 
 
 struct IC_CARD{//IC卡缓存结构体
