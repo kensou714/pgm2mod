@@ -3,6 +3,7 @@
 
 #include "game_type.h"
 #include "xyj2_func.h"
+#include "game_wave.h"
 
 //这个是自定义的升级经验表
 const int ExpTableMod[]={					//0x10161890升级经验表 这个是飞雪自己用的经验表
@@ -150,11 +151,13 @@ if ( isAdd == 99 )
 		  pgm2log("levelup - > %d\n",V8(RoleInfo+210));
         V8(RoleInfo + 209) = 1;
         V8(RoleInfo + 212) = 1;
-		if (V8(RoleInfo + 244) != V8(RoleInfo + 248) )
-			V8(RoleInfo + 244) = V8(RoleInfo + 244) +1;//+1气
+ //       sub_1002BA4A(RoleInfo, 25);//+25HP
+//		sub_1005D370(RoleInfo);//刷新生命显示
+        sub_10064AD0(RoleInfo, 1);//加一个气
         sub_10064C46(RoleInfo);
-
+//		sub_1005B144(RoleInfo);//刷新能量和分数显示
         sub_1005C3F4();
+		sub_1002F288(WAVE_SYS_02,64);//播放音效
       }
     }
     else
@@ -185,11 +188,13 @@ void __fastcall AddScore(int RoleInfo, signed int AddValue)
 				V8(RoleInfo + 3) =  V8(RoleInfo + 3) + 1;
 				AddLifes = 1;
 				sub_1005D9B4(RoleInfo);//刷新生命数显示
+				sub_1002F288(WAVE_SYS_03,64);//播放音效
 	}
 	if (V32(RoleInfo + 232) >= 1000000 && AddLifes == 1){//奖第二次命
 				V8(RoleInfo + 3) =  V8(RoleInfo + 3) + 1;
 				AddLifes = 2;
 				sub_1005D9B4(RoleInfo);//刷新生命数显示
+				sub_1002F288(WAVE_SYS_03,64);//播放音效
 	}
 
 	AddExp(RoleInfo,AddValue*100,99);//这里把分数当经验传过去
