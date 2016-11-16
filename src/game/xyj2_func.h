@@ -4381,5 +4381,9 @@
 #define sub_10126488 FUNC32(0x10126488)
 #define ubBIOS_GetArea FUNC32(0x10126490)
 
+
+
+#define	g_GAME_MODE	V8(0x20020105)
+
 #endif
 

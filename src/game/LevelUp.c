@@ -108,10 +108,10 @@ const short HitScoreTableMod[]={
 
 
 
-void AddExp(int RoleInfo, int AddValue,int isAdd)
+void AddExp(ROLE_MEM *Role, int AddValue,int isAdd)
 {
   int Area; // r7@5
-  int ICCard; // r5@6
+  IC_CARD *ICCard; // r5@6
   signed int isLevelUp; // r6@8
 
 if ( isAdd == 99 )
@@ -119,111 +119,108 @@ if ( isAdd == 99 )
   if ( AddValue )//增加值
   {
 	  pgm2log("AddExp -> %d\n",AddValue);
-    if ( V32(RoleInfo + 204) < (-1 - AddValue) )
+    if ( Role->NowEXP < (-1 - AddValue) )
     {
-      V32(RoleInfo + 204) += AddValue;
+      Role->NowEXP += AddValue;
       Area = ubArea_Get();
       if ( get_iccard_flag() )
       {
-        ICCard = sub_1000F328(V8(RoleInfo + 1));
+        ICCard = (IC_CARD *)(sub_1000F328(Role->PlayerNo));
         if ( ICCard )
-          V32(ICCard + 16) = V32(RoleInfo + 204);
+          ICCard->NowEXP = Role->NowEXP;
       }
       isLevelUp = 0;
-      while ( V8(RoleInfo + 210) < 99 && V32(RoleInfo + 204) >= V32(RoleInfo + 216) )
+      while ( Role->Level < 99 && Role->NowEXP >= Role->NextEXP )
       {
         isLevelUp = 1;
-        if ( ++V8(RoleInfo + 210) < 99 )
+        if ( ++Role->Level < 99 )
         {
           if ( Area != 2 && Area != 4 )
-            V32(RoleInfo + 216) = ExpTableMod[V8(RoleInfo + 210) + 1];
+            Role->NextEXP = ExpTableMod[Role->Level + 1];
           else
-            V32(RoleInfo + 216) = P32(0x10161700)[V8(RoleInfo + 210) + 1];
+            Role->NextEXP = ExpTableMod[Role->Level + 1];
         }
         else
         {
-          V8(RoleInfo + 210) = 99;
-          V32(RoleInfo + 216) = -1;
+          Role->Level = 99;
+          Role->NextEXP = -1;
         }
       }
       if ( isLevelUp )
       {
-		  pgm2log("levelup - > %d\n",V8(RoleInfo+210));
-        V8(RoleInfo + 209) = 1;
-        V8(RoleInfo + 212) = 1;
- //       sub_1002BA4A(RoleInfo, 25);//+25HP
-//		sub_1005D370(RoleInfo);//刷新生命显示
-        sub_10064AD0(RoleInfo, 1);//加一个气
-        sub_10064C46(RoleInfo);
-//		sub_1005B144(RoleInfo);//刷新能量和分数显示
+		 // pgm2log("levelup - > %d\n",V8(Role+210));
+        Role->BYTE_209 = 1;
+        Role->BYTE_212 = 1;
+ //       sub_1002BA4A(Role, 25);//+25HP
+//		sub_1005D370(Role);//刷新生命显示
+        sub_10064AD0(Role, 1);//加一个气
+        sub_10064C46(Role);
+//		sub_1005B144(Role);//刷新能量和分数显示
         sub_1005C3F4();
 		sub_1002F288(WAVE_SYS_02,64);//播放音效
       }
     }
     else
     {
-      V32(RoleInfo + 204) = -1;
+      Role->NowEXP = -1;
     }
   }
 }
-V32(RoleInfo + 232) = V32(RoleInfo + 204)/100;//让分数等于经验/100
+Role->Score = Role->NowEXP/100;//让分数等于经验/100
 }
 
 int AddLifes;
-void __fastcall AddScore(int RoleInfo, signed int AddValue)
+void __fastcall AddScore(int Role, signed int AddValue)
 {
-  int ICCard; // r6@9
+  IC_CARD *ICCard; // r6@9
 
   if ( AddValue )
   {
-    if ( V8(V32(RoleInfo + 4) + 390) )//暴气状态
+    if ( Role.pCmdPtr.UltraStateFlag )//暴气状态
       AddValue = 4;//暴气固定加2W分
-    if ( V32(RoleInfo + 232) < (-1 - AddValue) )
-      V32(RoleInfo + 232) += AddValue;
+    if ( Role->Score < (-1 - AddValue) )
+      Role->Score += AddValue;
 	else
-      V32(RoleInfo + 232) = -1;
+      Role->Score = -1;
 	if ( AddValue <= 50)//非hit的分数就*50倍
 		AddValue *= 50;
-	if (V32(RoleInfo + 232) >= 300000 && !AddLifes){//奖第一次命
-				V8(RoleInfo + 3) =  V8(RoleInfo + 3) + 1;
+	if (Role->Score >= 300000 && !AddLifes){//奖第一次命
+				Role->Lifes =  Role->Lifes + 1;
 				AddLifes = 1;
-				sub_1005D9B4(RoleInfo);//刷新生命数显示
+				sub_1005D9B4(Role);//刷新生命数显示
 				sub_1002F288(WAVE_SYS_03,64);//播放音效
 	}
-	if (V32(RoleInfo + 232) >= 1000000 && AddLifes == 1){//奖第二次命
-				V8(RoleInfo + 3) =  V8(RoleInfo + 3) + 1;
+	if (Role->Score >= 1000000 && AddLifes == 1){//奖第二次命
+				Role->Lifes =  Role->Lifes + 1;
 				AddLifes = 2;
-				sub_1005D9B4(RoleInfo);//刷新生命数显示
+				sub_1005D9B4(Role);//刷新生命数显示
 				sub_1002F288(WAVE_SYS_03,64);//播放音效
 	}
 
-	AddExp(RoleInfo,AddValue*100,99);//这里把分数当经验传过去
+	AddExp(Role,AddValue*100,99);//这里把分数当经验传过去
     if ( get_iccard_flag() )
     {
-      ICCard = sub_1000F328(V8(RoleInfo + 1));
+      ICCard = (IC_CARD *)(sub_1000F328(Role->PlayerNo));
       if ( ICCard )
       {
-        if ( V8(0x20020105) )
+        if ( g_GAME_MODE )
         {
-          if ( V8(0x20020105) == 2 )
+          if ( g_GAME_MODE == MODE_BOSS )
           {
-            if ( V32(ICCard + 24) < V32(RoleInfo + 232) )
-              V32(ICCard + 24) = V32(RoleInfo + 232);
+            if ( ICCard->ChallengeScore < Role->Score )
+              ICCard->ChallengeScore = Role->Score;
           }
-          else if ( !V8(0x20020105) && V32(ICCard + 28) < V32(RoleInfo + 232) )
+          else if ( g_GAME_MODE==MODE_STORY && ICCard->IRScore < Role->Score )
           {
-            V32(ICCard + 28) = V32(RoleInfo + 232);
+            ICCard->IRScore = Role->Score;
           }
         }
-        else if ( V32(ICCard + 20) < V32(RoleInfo + 232) )
+        else if ( ICCard->StoryScore < Role->Score )
         {
-          V32(ICCard + 20) = V32(RoleInfo + 232);
+          ICCard->StoryScore = Role->Score;
         }
       }
     }
-    V8(RoleInfo + 230) = 1;
-
-
-	
+    Role->BYTE_230 = 1;
   }
 }
