@@ -41,6 +41,7 @@ void CopyRight()//版权信息页面
 	vPrint(8, 21, 0, 0, "THANKS TO ALL THE PEOPLE WHO HAVE ");
 	vPrint(10, 23, 0, 0, "CONTRIBUTED TO THE PGM2 SIMULATION.");
 
+	
 	vPalette_FadeManage(1, 0, 8, 0);//淡入
 	for (i = 0;i < 500;i++)//显示500帧
 	{

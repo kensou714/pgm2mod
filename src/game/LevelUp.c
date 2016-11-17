@@ -95,6 +95,7 @@ const short HitScoreTableMod[]={
 *	4.修改分数等于经验.
 *=================================================================
 */
+int AddLifes;
 void AddExp(ROLE_MEM *Role, int AddValue,int isAdd)
 {
 	int Area; // r7@5
@@ -153,9 +154,22 @@ void AddExp(ROLE_MEM *Role, int AddValue,int isAdd)
 		}
 	}
 	Role->Score = Role->NowEXP/100;//让分数等于经验/100
+	if (Role->NowEXP >= 50000000 && !AddLifes){//奖第一次命
+		pgm2log("奖命");
+		Role->Lifes =  Role->Lifes + 1;
+		AddLifes = 1;
+		sub_1005D9B4(Role);//刷新生命数显示
+		sub_1002F288(WAVE_SYS_03,1);//播放音效
+	}
+	if (Role->NowEXP >= 100000000 && AddLifes == 1){//奖第二次命
+		Role->Lifes =  Role->Lifes + 1;
+		AddLifes = 2;
+		sub_1005D9B4(Role);//刷新生命数显示
+		sub_1002F288(WAVE_SYS_03,1);//播放音效
+	}
 }
 
-int AddLifes;
+
 void __fastcall AddScore(ROLE_MEM *Role, signed int AddValue)
 {
 	IC_CARD *ICCard; // r6@9
@@ -170,18 +184,7 @@ void __fastcall AddScore(ROLE_MEM *Role, signed int AddValue)
 			Role->Score = -1;
 		if ( AddValue <= 50)//非hit的分数就*50倍
 			AddValue *= 50;
-		if (Role->Score >= 300000 && !AddLifes){//奖第一次命
-			Role->Lifes =  Role->Lifes + 1;
-			AddLifes = 1;
-			sub_1005D9B4(Role);//刷新生命数显示
-			sub_1002F288(WAVE_SYS_03,64);//播放音效
-		}
-		if (Role->Score >= 1000000 && AddLifes == 1){//奖第二次命
-			Role->Lifes =  Role->Lifes + 1;
-			AddLifes = 2;
-			sub_1005D9B4(Role);//刷新生命数显示
-			sub_1002F288(WAVE_SYS_03,64);//播放音效
-		}
+
 
 		AddExp(Role,AddValue*100,99);//这里把分数当经验传过去
 		if ( get_iccard_flag() ){
