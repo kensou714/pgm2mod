@@ -11,9 +11,9 @@
 #define sub_10000054 FUNC32(0x10000054)
 #define vInputUpdate FUNC16(0x10000068)
 #define vInputReset FUNC16(0x10000092)
-#define uwInputPressKey FUNC16(0x100000b2)//这个返回按键是否是按下状态
-#define uwInputPressKeyLong FUNC16(0x100000c0)//这个就是判断按键弹起 应该是check_key_up
-#define uwInputPressKeyShort FUNC16(0x100000e8)
+#define uwInputHold FUNC16(0x100000b2)//这个返回按键是否是按下状态
+#define uwInputKick FUNC16(0x100000c0)//这个就是判断按键弹起 应该是check_key_up
+#define uwInputDown FUNC16(0x100000e8)
 #define sub_1000010C FUNC16(0x1000010c)
 #define sub_1000011A FUNC16(0x1000011a)
 #define uwInputKeyGetCnt FUNC16(0x10000126)
@@ -29,7 +29,7 @@
 #define sub_1000028A FUNC16(0x1000028a)
 #define sub_100002CE FUNC16(0x100002ce)
 #define sub_10000370 FUNC16(0x10000370)
-#define sub_100003C0 FUNC16(0x100003c0)
+#define SetBankPal FUNC16(0x100003c0)//设置系统字体用的色盘
 #define sub_100003F6 FUNC16(0x100003f6)
 #define sub_1000042C FUNC16(0x1000042c)
 #define sub_100004EE FUNC16(0x100004ee)
@@ -59,7 +59,7 @@
 #define printf FUNC16(0x10000f00)
 #define sub_10000F92 FUNC16(0x10000f92)
 #define sub_10000FAC FUNC16(0x10000fac)
-#define sub_10000FCA FUNC16(0x10000fca)
+#define DrawLine FUNC16(0x10000fca)//画线
 #define sub_10001044 FUNC16(0x10001044)
 #define sub_10001238 FUNC16(0x10001238)
 #define sub_1000138C FUNC16(0x1000138c)
@@ -906,10 +906,10 @@
 #define sub_100347A0 FUNC16(0x100347a0)
 #define sub_100348FC FUNC16(0x100348fc)
 #define sub_1003490E FUNC16(0x1003490e)
-#define sub_10034920 FUNC16(0x10034920)
+#define CalendaSetting FUNC16(0x10034920)
 #define sub_10034E7C FUNC16(0x10034e7c)
 #define sub_10034EF4 FUNC16(0x10034ef4)
-#define test_mode_main FUNC16(0x10035112)
+#define TestModeMain FUNC16(0x10035112)
 #define sub_10035238 FUNC16(0x10035238)
 #define sub_10035372 FUNC16(0x10035372)
 #define sub_100355D6 FUNC16(0x100355d6)
@@ -921,7 +921,7 @@
 #define qc_counter FUNC16(0x100364fa)
 #define qc_reader FUNC16(0x10036638)
 #define qc_main_select FUNC16(0x1003721e)
-#define qc_main FUNC16(0x10037340)
+#define QCModeMain FUNC16(0x10037340)
 #define vShow_Copyright FUNC16(0x100374b0)
 #define sub_100376A4 FUNC16(0x100376a4)
 #define sub_10037806 FUNC16(0x10037806)
@@ -992,13 +992,13 @@
 #define sub_10040DCE FUNC16(0x10040dce)
 #define sub_10040F12 FUNC16(0x10040f12)
 #define sub_1004103C FUNC16(0x1004103c)
-#define sub_10041F56 FUNC16(0x10041f56)
+#define GameOpenning FUNC16(0x10041f56)
 #define nullsub_41 FUNC16(0x10041faa)
 #define sub_10041FAC FUNC16(0x10041fac)
 #define sub_10042ABC FUNC16(0x10042abc)
 #define sub_10042AE2 FUNC16(0x10042ae2)
 #define sub_10042B48 FUNC16(0x10042b48)
-#define sub_10042C6C FUNC16(0x10042c6c)
+#define GameMain FUNC16(0x10042c6c)
 #define nullsub_42 FUNC16(0x10042d26)
 #define nullsub_3 FUNC16(0x10042d40)
 #define nullsub_4 FUNC16(0x10042d42)
@@ -4383,7 +4383,9 @@
 
 
 
-#define	g_GAME_MODE	V8(0x20020105)
 
+#define g_MAIN_FSM	V8(0x20020104)//主状态机
+#define	g_GAME_MODE	V8(0x20020105)//游戏模式
+#define isQCMode	V8(0x20020107)//
 #endif
 

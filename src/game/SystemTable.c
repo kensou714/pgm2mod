@@ -1,6 +1,8 @@
 //所有ID相关系统表扩展在此处 如升级分数、可捡物品、攻击经验、等级限制等
 //这里用来存放待整理的一些表格资料
 
+const char *AreaName[]={"CHINA   ","TAIWAN  ","JAPAN   ","HONGKONG","OVERSEA "};
+
 
 //0x10161890大陆版升级经验表 
 const int ExpTableChina[]={	

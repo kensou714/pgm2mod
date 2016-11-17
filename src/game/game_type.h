@@ -515,5 +515,6 @@ enum XYJ2GAMEMODE{
 	MODE_IR,
 	MODE_BOSS,
 };
+
 #endif
 
