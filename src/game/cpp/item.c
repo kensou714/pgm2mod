@@ -17,6 +17,17 @@
 *
 *
 */
+const short ItemType1[]={161,163,175,185,188,195,200,202,203,205,206,207};//普通道具加任务道具类型
+const short ItemType2[]={162,168,170,171,174,176,177,189,191,197,199,201};//大型道具类型
+const short ItemType3[]={125,126,127,128,129,130,131,132,133,134,135,136,138,139,142};//套装防具
+const short ItemType4[]={91,92,93,94,95,96,97,98,99,100,101,104,105,106,107,108,110,111,112,115,116,117,118,119,120,121,122,123,124};//其他防具
+
+
+
+
+
+
+
 
 const char *ItemName[]={
 "无道具",
@@ -54,8 +65,13 @@ const char *ItemName[]={
 "涅盘经","五龙经","维摩经","金刚经","法华经"
 };
 
-
-
+const char *FoodName[]={
+"人参果","蟠桃","玉液","琼浆",
+"雷公锤","行李","IGS LOGO","PGM基板","小鼓王机台","赛车机台","炼丹炉","七星阵","逆鳞","聚宝盆","如来佛像","观音佛像","钻石","红宝石","蓝宝石","翡翠","琥珀","玛瑙","玉","经书",
+"补气药包","杨柳净瓶",
+"西币1元","西币10元","西币100元",
+"芭蕉扇","芭蕉扇"
+};
 
 
 
@@ -64,7 +80,7 @@ void __fastcall DropFoodA(__int16 x, __int16 y, __int16 a3, int id, __int16 a5, 
 {
 	int OBJ; // [sp+8h] [bp-28h]@11
 
-	if ( g_MAIN_FSM != 2 && id > 0x8000 && id < 0x8020 )
+	if ( g_MAIN_FSM != 2 )
 	{
 		if ( x >= gDstX + 33 )
 		{
@@ -77,7 +93,18 @@ void __fastcall DropFoodA(__int16 x, __int16 y, __int16 a3, int id, __int16 a5, 
 		}
 		if ( y > gDstY + 224 )
 			y = gDstY + 210;
-		OBJ = CreatFoodObj(x, y, a3, id, a5);
+		if(id == 214)//type1
+			OBJ =CreatItemObj( x, y, a3, ItemType1[rand(12)] , 1, 0, 0, 0);
+		if(id == 215)//type2
+			OBJ =CreatItemObj( x, y, a3, ItemType2[rand(12)] , 1, 0, 0, 0);
+		if(id == 216)//type3
+			OBJ =CreatItemObj( x, y, a3, ItemType2[rand(15)] , 1, 0, 0, 0);
+		if(id == 217)//type4
+			OBJ =CreatItemObj( x, y, a3, ItemType2[rand(29)] , 1, 0, 0, 0);
+		if(id == 218)//type5
+			OBJ =CreatItemObj( x, y, a3, + (V8(0x2005F69C+2)*9)+rand(8)+1 , 1, 0, 0, 0);
+		else
+			OBJ = CreatFoodObj(x, y, a3, id, a5);
 		if ( OBJ )
 			*(_WORD *)(OBJ + 104) = a6;
 	}
@@ -121,7 +148,7 @@ void __fastcall DropItemA(__int16 x, __int16 y, __int16 a3, int id, int a5, __in
 {
 	int OBJ; // r4@12
 	
-	if ( g_MAIN_FSM != 2 && id && id < 214 )
+	if ( g_MAIN_FSM != 2 )
 	{
 		if ( x >= gDstX + 33 )
 	{
@@ -134,7 +161,18 @@ void __fastcall DropItemA(__int16 x, __int16 y, __int16 a3, int id, int a5, __in
 	}
 	if ( y > gDstY + 224 )
 		y = gDstY + 210;
-	OBJ = CreatItemObj(x, y, a3, id, 1, a5, a6, a7);
+	if(id == 214)//type1
+		OBJ =CreatItemObj( x, y, a3, ItemType1[rand(12)] , 1, 0, 0, 0);
+	if(id == 215)//type2
+		OBJ =CreatItemObj( x, y, a3, ItemType2[rand(12)] , 1, 0, 0, 0);
+	if(id == 216)//type3
+		OBJ =CreatItemObj( x, y, a3, ItemType2[rand(15)] , 1, 0, 0, 0);
+	if(id == 217)//type4
+		OBJ =CreatItemObj( x, y, a3, ItemType2[rand(29)] , 1, 0, 0, 0);
+	if(id == 218)//type5
+		OBJ =CreatItemObj( x, y, a3, + (V8(0x2005F69C+2)*9)+rand(8)+1 , 1, 0, 0, 0);
+	else
+		OBJ = CreatItemObj(x, y, a3, id, 1, a5, a6, a7);
 	if ( OBJ )
 		*(_WORD *)(OBJ + 104) = a8;
 	}

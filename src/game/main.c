@@ -47,6 +47,7 @@ void CopyRight()//版权信息页面
 	{
 		if (uwInputHold(KEY_P1_A) && uwInputHold(KEY_P1_B))//这里添加了一个按住1P的AB键进入DEBUG_MODE
 		{
+			g_MAIN_FSM = 5;
 			main_menu_mode();
 			CopyRight();
 			return;
