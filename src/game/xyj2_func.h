@@ -1135,7 +1135,7 @@
 #define sub_1004E692 FUNC16(0x1004e692)
 #define sub_1004E6B8 FUNC16(0x1004e6b8)
 #define sub_1004E6C0 FUNC16(0x1004e6c0)
-#define sub_1004E74C FUNC16(0x1004e74c)
+#define CreatFoodObj FUNC16(0x1004e74c)
 #define sub_1004E85A FUNC16(0x1004e85a)
 #define sub_1004E8FA FUNC16(0x1004e8fa)
 #define sub_1004E9F0 FUNC16(0x1004e9f0)
@@ -1987,7 +1987,7 @@
 #define sub_10098236 FUNC16(0x10098236)
 #define sub_10098266 FUNC16(0x10098266)
 #define sub_1009830C FUNC16(0x1009830c)
-#define sub_10098326 FUNC16(0x10098326)
+#define CreatItemObj FUNC16(0x10098326)
 #define sub_100984AE FUNC16(0x100984ae)
 #define sub_10098594 FUNC16(0x10098594)
 #define sub_10098692 FUNC16(0x10098692)
@@ -4387,5 +4387,10 @@
 #define g_MAIN_FSM	V8(0x20020104)//主状态机
 #define	g_GAME_MODE	V8(0x20020105)//游戏模式
 #define isQCMode	V8(0x20020107)//
+
+#define gDstX		VS16(0x20020154)//目标X坐标
+#define gDstY		VS16(0x20020156)//目标Y坐标
+
+
 #endif
 

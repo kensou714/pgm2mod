@@ -106,7 +106,7 @@ void AddExp(ROLE_MEM *Role, int AddValue,int isAdd)
 	{
 		if ( AddValue )//Ôö¼ÓÖµ
 		{
-			pgm2log("AddExp -> %d\n",AddValue);
+			//pgm2log("AddExp -> %d\n",AddValue);
 			if ( Role->NowEXP + AddValue < 0xFFFFFFFF )
 			{
 				Role->NowEXP += AddValue;
