@@ -176,5 +176,4 @@ void __fastcall DropItemA(__int16 x, __int16 y, __int16 a3, int id, int a5, __in
 	if ( OBJ )
 		*(_WORD *)(OBJ + 104) = a8;
 	}
-	//pgm2log("µôÂä±¦Îï -> %s\n",ItemName[id]);
 }
