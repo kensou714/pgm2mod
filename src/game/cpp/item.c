@@ -17,10 +17,10 @@
 *
 *
 */
-const short ItemType1[]={161,163,175,185,188,195,200,202,203,205,206,207};//普通道具加任务道具类型
-const short ItemType2[]={162,168,170,171,174,176,177,189,191,197,199,201};//大型道具类型
-const short ItemType3[]={125,126,127,128,129,130,131,132,133,134,135,136,138,139,142};//套装防具
-const short ItemType4[]={91,92,93,94,95,96,97,98,99,100,101,104,105,106,107,108,110,111,112,115,116,117,118,119,120,121,122,123,124};//其他防具
+const char ItemType1[]={161,163,175,185,188,195,200,202,203,205,206,207};//普通道具加任务道具类型
+const char ItemType2[]={162,168,170,171,174,176,177,189,191,197,199,201};//大型道具类型
+const char ItemType3[]={125,126,127,128,129,130,131,132,133,134,135,136,138,139,142};//套装防具
+const char ItemType4[]={91,92,93,94,95,96,97,98,99,100,101,104,105,106,107,108,110,111,112,115,116,117,118,119,120,121,122,123,124};//其他防具
 
 
 
@@ -28,7 +28,7 @@ const short ItemType4[]={91,92,93,94,95,96,97,98,99,100,101,104,105,106,107,108,
 
 
 
-
+/*
 const char *ItemName[]={
 "无道具",
 "金箍棍","通天棍","蟠龙破岩棍","双炼神棒","六轮烈日棍","天罡棍","超大圣","不动龙棍","猿神擎天柱",
@@ -72,7 +72,7 @@ const char *FoodName[]={
 "西币1元","西币10元","西币100元",
 "芭蕉扇","芭蕉扇"
 };
-
+*/
 
 
 //0x1004E85A 单个掉落加分补血物品
@@ -94,15 +94,15 @@ void __fastcall DropFoodA(__int16 x, __int16 y, __int16 a3, int id, __int16 a5, 
 		if ( y > gDstY + 224 )
 			y = gDstY + 210;
 		if(id == 214)//type1
-			OBJ =CreatItemObj( x, y, a3, ItemType1[rand(12)] , 1, 0, 0, 0);
-		if(id == 215)//type2
-			OBJ =CreatItemObj( x, y, a3, ItemType2[rand(12)] , 1, 0, 0, 0);
-		if(id == 216)//type3
-			OBJ =CreatItemObj( x, y, a3, ItemType2[rand(15)] , 1, 0, 0, 0);
-		if(id == 217)//type4
-			OBJ =CreatItemObj( x, y, a3, ItemType2[rand(29)] , 1, 0, 0, 0);
-		if(id == 218)//type5
-			OBJ =CreatItemObj( x, y, a3, + (V8(0x2005F69C+2)*9)+rand(8)+1 , 1, 0, 0, 0);
+			OBJ =CreatItemObj( x, y, a3, (int)(ItemType1[rand(12)])  , 1, 0, 0, 0);
+		else if(id == 215)//type2
+			OBJ =CreatItemObj( x, y, a3, (int)(ItemType2[rand(12)])  , 1, 0, 0, 0);
+		else if(id == 216)//type3
+			OBJ =CreatItemObj( x, y, a3, (int)(ItemType3[rand(15)])  , 1, 0, 0, 0);
+		else if(id == 217)//type4
+			OBJ =CreatItemObj( x, y, a3,(int)(ItemType4[rand(29)])  , 1, 0, 0, 0);
+		else if(id == 218)//type5
+			OBJ =CreatItemObj( x, y, a3, (V8(0x2005F69C+2)*9)+rand(8)+1 , 1, 0, 0, 0);
 		else
 			OBJ = CreatFoodObj(x, y, a3, id, a5);
 		if ( OBJ )
@@ -162,19 +162,19 @@ void __fastcall DropItemA(__int16 x, __int16 y, __int16 a3, int id, int a5, __in
 	if ( y > gDstY + 224 )
 		y = gDstY + 210;
 	if(id == 214)//type1
-		OBJ =CreatItemObj( x, y, a3, ItemType1[rand(12)] , 1, 0, 0, 0);
-	if(id == 215)//type2
-		OBJ =CreatItemObj( x, y, a3, ItemType2[rand(12)] , 1, 0, 0, 0);
-	if(id == 216)//type3
-		OBJ =CreatItemObj( x, y, a3, ItemType2[rand(15)] , 1, 0, 0, 0);
-	if(id == 217)//type4
-		OBJ =CreatItemObj( x, y, a3, ItemType2[rand(29)] , 1, 0, 0, 0);
-	if(id == 218)//type5
-		OBJ =CreatItemObj( x, y, a3, + (V8(0x2005F69C+2)*9)+rand(8)+1 , 1, 0, 0, 0);
+		OBJ =CreatItemObj( x, y, a3, (int)(ItemType1[rand(12)])  , 1, 0, 0, 0);
+	else if(id == 215)//type2
+		OBJ =CreatItemObj( x, y, a3, (int)(ItemType2[rand(12)])  , 1, 0, 0, 0);
+	else if(id == 216)//type3
+		OBJ =CreatItemObj( x, y, a3, (int)(ItemType3[rand(15)])  , 1, 0, 0, 0);
+	else if(id == 217)//type4
+		OBJ =CreatItemObj( x, y, a3,(int)(ItemType4[rand(29)])  , 1, 0, 0, 0);
+	else if(id == 218)//type5
+		OBJ =CreatItemObj( x, y, a3, (V8(0x2005F69C+2)*9)+rand(8)+2 , 1, 0, 0, 0);
 	else
 		OBJ = CreatItemObj(x, y, a3, id, 1, a5, a6, a7);
 	if ( OBJ )
 		*(_WORD *)(OBJ + 104) = a8;
 	}
-	pgm2log("掉落宝物 -> %s\n",ItemName[id]);
+	//pgm2log("掉落宝物 -> %s\n",ItemName[id]);
 }
