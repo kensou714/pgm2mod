@@ -96,7 +96,7 @@ const short HitScoreTableMod[]={
 *=================================================================
 */
 int AddLifes;
-void AddExp(ROLE_MEM *Role, int AddValue,int isAdd)
+void AddExp(ROLE_RAM *Role, int AddValue,int isAdd)
 {
 	int Area; // r7@5
 	IC_CARD *ICCard; // r5@6
@@ -113,7 +113,7 @@ void AddExp(ROLE_MEM *Role, int AddValue,int isAdd)
 				Area = ubArea_Get();
 				if ( get_iccard_flag() )
 				{
-					ICCard = (IC_CARD *)(sub_1000F328(Role->PlayerNo));
+					ICCard = (IC_CARD *)(ReadICCardData(Role->PlayerNo));
 					if ( ICCard )
 						ICCard->NowEXP = Role->NowEXP;
 				}
@@ -170,7 +170,7 @@ void AddExp(ROLE_MEM *Role, int AddValue,int isAdd)
 }
 
 
-void __fastcall AddScore(ROLE_MEM *Role, signed int AddValue)
+void __fastcall AddScore(ROLE_RAM *Role, signed int AddValue)
 {
 	IC_CARD *ICCard; // r6@9
 
@@ -188,7 +188,7 @@ void __fastcall AddScore(ROLE_MEM *Role, signed int AddValue)
 
 		AddExp(Role,AddValue*100,99);//这里把分数当经验传过去
 		if ( get_iccard_flag() ){
-			ICCard = (IC_CARD *)(sub_1000F328(Role->PlayerNo));
+			ICCard = (IC_CARD *)(ReadICCardData(Role->PlayerNo));
 			if ( ICCard ){
 				if ( g_GAME_MODE ){
 					if ( g_GAME_MODE == MODE_BOSS ){
