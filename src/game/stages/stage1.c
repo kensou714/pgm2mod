@@ -14,9 +14,9 @@
 extern void CreatMapObj(int a1,int a2,int a3,int a4,int a5,short MapPal,short a7,short a8,short a9,short a10,short a11);
 extern void MotionInit();
 #define MotionState	V8(0x20020610)
-
-
-
+#define FlyBoxOBJ	V32(0x20020624)
+#define BossCMD		V32(0x20020614)
+#define SecretFlag1	V16(0x2002061)
 void s1m1f1()
 {
 	short MapPal;
@@ -36,19 +36,19 @@ void s1m1f1()
 	CreatMapObj(0x1033FBC0,1223,0,167,0,MapPal,-2,0,1,7,6);
 	CreatMapObj(0x1033FB6C,1397,0,167,0,MapPal,-2,0,1,7,6);
 	
-	V16(0x20020618) = 0;
+	SecretFlag1 = 0;
 	V16(0x2002061A) = 0;
 	V16(0x2002061C) = 0;
 	V16(0x2002061E) = 0;
 	V16(0x20020620) = 0;
 	V8(0x20020628) = 1;	
 
-	V32(0x20020624) = CreatPicOBJ(0x1033FAA8, 714, 50, 0, 1);
-	ExecPicCMD(V32(0x20020624), 0x1033F450);
-	V16(V32(0x20020624)+266) = 1;
-	V16(V32(0x20020624)+268) = 7;
-	V16(V32(0x20020624)+270) = 6;
-	MapPal = sub_1004FBE2(V32(0x20020624)+256, 6, 0, 0);
+	FlyBoxOBJ = CreatPicOBJ(0x1033FAA8, 714, 50, 0, 1);
+	ExecPicCMD(FlyBoxOBJ, 0x1033F450);
+	V16(FlyBoxOBJ+266) = 1;
+	V16(FlyBoxOBJ+268) = 7;
+	V16(FlyBoxOBJ+270) = 6;
+	MapPal = sub_1004FBE2(FlyBoxOBJ+256, 6, 0, 0);
 	sub_1004FF3C(MapPal, 0, 0);
 	
 	sub_1004F566(0, 8, 512, 248);
@@ -66,7 +66,7 @@ void s1m1f1()
 	sub_1001BDCC();
 	sub_10091516();
 	sub_10098146();	
-	V32(0x20020614) = 0;
+	BossCMD = 0;
 	MotionState = 0;
 	
 
@@ -117,30 +117,30 @@ int s1m1f2()
 				sub_100917CC();
 				if (GetRoleInBox(512,1024,248,0))
 				{
-					if (V32(0x20020624))
+					if (FlyBoxOBJ)
 					{
 						for (i=0;i<4;i++)
 						{
 							RoleRAM = (ROLE_RAM *)GetRoleInfoRAM(i);
 							ICCard = (IC_CARD *)ReadICCardData(RoleRAM->PlayerNo);
 							if ( (ICCard && ICCard->OverTimes>0) || sub_10065570())
-								V16(0x20020618) = 1;
+								SecretFlag1 = 1;
 						}
-						V16(0x20020618) = 1;
-						if (V16(0x20020618))
+						SecretFlag1 = 1;
+						if (SecretFlag1)
 						{
 							V16(0x2002061A) = 1;
 							OBJ = CreatPicOBJ(
 							0x1033FAA8,
-							gDstX - V16(0x2002015C) - (V16(V32(0x20020624)+268) * (gDstX>>3)) + (V16(V32(0x20020624)+28)&0x7FF),
-							gDstY - V16(0x2002015E) - (V16(V32(0x20020624)+270) * (gDstY>>3)) + (V16(V32(0x20020624)+30)&0x3FF),
+							gDstX - V16(0x2002015C) - (V16(FlyBoxOBJ+268) * (gDstX>>3)) + (V16(FlyBoxOBJ+28)&0x7FF),
+							gDstY - V16(0x2002015E) - (V16(FlyBoxOBJ+270) * (gDstY>>3)) + (V16(FlyBoxOBJ+30)&0x3FF),
 							0,
 							1
 							);
 							ExecPicCMD(OBJ,0x1033F8DC);
 							V32(OBJ + 124) = 0;
 							V16(OBJ + 112) = 1;
-							V32(0x20020624) = OBJ;
+							FlyBoxOBJ = OBJ;
 						}
 					}
 					sub_100918EE();
@@ -181,7 +181,7 @@ int s1m1f2()
 				sub_1002B7F6();
 				sub_1004D14A();
 				StopPlayerCtrl(0);
-				if (V16(0x20020618))
+				if (SecretFlag1)
 					V16(0x2002061C) = 1;
 				pgm2log("0");
 				for(i=0;i<20;i++)
@@ -248,7 +248,7 @@ int s1m1f2()
 					sub_100210EC(Player, v9);
 				}
 				for ( i = 0; i < 100; ++i )
-				ScreenUpdate();
+					ScreenUpdate();
 				sub_10043D3C();
 				Player = (ROLE_CMD *)sub_100BF8AC(8);
 				if ( !Player )
@@ -258,28 +258,28 @@ int s1m1f2()
 				switch ( Player->RoleId_1 )
 				{
 					case 8u:
-						ExecDialogRight(V16(V32(0x20020614) + 256), 0, 0, 0, 0);
+						ExecDialogRight(V16(BossCMD + 256), 0, 0, 0, 0);
 						ExecDialogLeft(Player->RoleId_1, 0, 1, 0, Player->pRoleInfoRAM);
 						break;
 					case 0u:
 					case 1u:
 					case 2u:
-						ExecDialogRight(V16(V32(0x20020614) + 256), 0, 17, 0, 0);
+						ExecDialogRight(V16(BossCMD + 256), 0, 17, 0, 0);
 						break;
 					case 3u:
-						ExecDialogRight(V16(V32(0x20020614) + 256), 0, 11, 0, 0);
+						ExecDialogRight(V16(BossCMD + 256), 0, 11, 0, 0);
 						ExecDialogLeft(Player->RoleId_1, 0, 12, 0, Player->pRoleInfoRAM);
-						ExecDialogRight(V16(V32(0x20020614) + 256), 0, 13, 0, 0);
+						ExecDialogRight(V16(BossCMD + 256), 0, 13, 0, 0);
 						break;
 					case 4u:
 					case 5u:
 					case 6u:
 					case 7u:
 					case 9u:
-						ExecDialogRight(V16(V32(0x20020614) + 256), 0, 21, 0, 0);
+						ExecDialogRight(V16(BossCMD + 256), 0, 21, 0, 0);
 						break;
 					default:
-						ExecDialogRight(V16(V32(0x20020614) + 256), 0, 17, 0, 0);
+						ExecDialogRight(V16(BossCMD + 256), 0, 17, 0, 0);
 						break;
 				}
 				sub_1004C54E();
@@ -287,9 +287,9 @@ int s1m1f2()
 				sub_1004C54E();
 				sub_10043E24();
 				SetMotionTimer(99);
-				if ( V32(0x20020614))
-					sub_100786F4(V32(0x20020614));
-				V16(V32(0x20020614) + 522) = 30;
+				if ( BossCMD)
+					sub_100786F4(BossCMD);
+				V16(BossCMD + 522) = 30;
 				sub_10022584(0);
 				sub_1002297C();
 				sub_100207F0();
@@ -298,13 +298,13 @@ int s1m1f2()
 				sub_10007F22(1);
 				sub_1007722E(1);
 				sub_1009152C(1);
-				if ( V32(0x20020624) && !V16(0x2002061E) )
+				if ( FlyBoxOBJ && !V16(0x2002061E) )
 				{
 					V16(0x20020624 + 28) = gDstX;
 					V16(0x20020624 + 92) = 1;
-					ExecPicCMD(V32(0x20020624), 0x1033F79C);
+					ExecPicCMD(FlyBoxOBJ, 0x1033F79C);
 				}
-				if ( V16(0x20020618) )
+				if ( SecretFlag1 )
 					V16(0x2002061C) = 0;
 				MotionState = 7;
 				return 0;
@@ -313,30 +313,30 @@ int s1m1f2()
 				MotionState = 8;
 				return 0;
 			case 8:
-				if ((V32(0x20020614) && !V16(V32(0x20020614) + 108)) || sub_100914E8(V16(V32(0x20020614) + 256)) )
+				if ((BossCMD && !V16(BossCMD + 108)) || sub_100914E8(V16(BossCMD + 256)) )
 				{
-				sub_100208A2(1);
-				if ( V16(0x20020618) )
-				V16(0x2002061C) = 1;
-				sub_10098146();
-				sub_10096AFC();
-				sub_100207FA();
-				sub_1001BDDE();
-				sub_10007F22(0);
-				sub_10078C90(V16(V32(0x20020614) + 282));
-				V16(V32(0x20020614) + 108) = 1;
-				V16(V32(0x20020614) + 184) = 0;
-				sub_100BF090(V32(0x20020614));
-				sub_1007722E(0);
-				sub_1002BF0E();
-				sub_10007F32(0);
-				sub_10007F38(0);
-				sub_10022584(1);
-				sub_10022984();
-				sub_1002B7F6();
-				sub_1004D14A();
-				StopPlayerCtrl(0);
-				MotionState = 15;
+					sub_100208A2(1);
+					if ( SecretFlag1 )
+						V16(0x2002061C) = 1;
+					sub_10098146();
+					sub_10096AFC();
+					sub_100207FA();
+					sub_1001BDDE();
+					sub_10007F22(0);
+					sub_10078C90(V16(BossCMD + 282));
+					V16(BossCMD + 108) = 1;
+					V16(BossCMD + 184) = 0;
+					sub_100BF090(BossCMD);
+					sub_1007722E(0);
+					sub_1002BF0E();
+					sub_10007F32(0);
+					sub_10007F38(0);
+					sub_10022584(1);
+					sub_10022984();
+					sub_1002B7F6();
+					sub_1004D14A();
+					StopPlayerCtrl(0);
+					MotionState = 15;
 				}
 				else
 				{
@@ -356,50 +356,50 @@ int s1m1f2()
 					switch ( Player->RoleId_1 )
 					{
 						case 8u:
-							ExecDialogRight(V16(V32(0x20020614) + 256), 0, 8, 0, 0);
+							ExecDialogRight(V16(BossCMD + 256), 0, 8, 0, 0);
 							ExecDialogLeft(Player->RoleId_1, 0, 9, 0, Player->pRoleInfoRAM);
-							ExecDialogRight(V16(V32(0x20020614) + 256), 0, 10, 0, 0);
+							ExecDialogRight(V16(BossCMD + 256), 0, 10, 0, 0);
 							break;
 						case 3u:
 							ExecDialogLeft(Player->RoleId_1, 0, 14, 0, Player->pRoleInfoRAM);
-							ExecDialogRight(V16(V32(0x20020614) + 256), 0, 15, 0, 0);
+							ExecDialogRight(V16(BossCMD + 256), 0, 15, 0, 0);
 							ExecDialogLeft(Player->RoleId_1, 0, 16, 0, Player->pRoleInfoRAM);
 							break;
 						case 0u:
 						case 1u:
 						case 2u:
-							ExecDialogRight(V16(V32(0x20020614) + 256), 0, 18, 0, 0);
+							ExecDialogRight(V16(BossCMD + 256), 0, 18, 0, 0);
 							ExecSystemOBJ(5, Player->Off_28, Player->Off_30 + 1, -100, 2, Player->Off_200);
 							for ( i = 0; i < 20; ++i )
 								ScreenUpdate();
 							ExecDialogLeft(Player->RoleId_1, 0, 19, 0, Player->pRoleInfoRAM);
-							ExecDialogRight(V16(V32(0x20020614) + 256), 0, 20, 0, 0);
+							ExecDialogRight(V16(BossCMD + 256), 0, 20, 0, 0);
 							break;
 						default:
-							ExecDialogRight(V16(V32(0x20020614) + 256), 0, 18, 0, 0);
+							ExecDialogRight(V16(BossCMD + 256), 0, 18, 0, 0);
 							ExecSystemOBJ(5, Player->Off_28, Player->Off_30 + 1, -100, 2, Player->Off_200);
 							for ( i = 0; i < 20; ++i )
 								ScreenUpdate();
 							ExecDialogLeft(Player->RoleId_1, 0, 19, 0, Player->pRoleInfoRAM);
-							ExecDialogRight(V16(V32(0x20020614) + 256), 0, 20, 0, 0);
+							ExecDialogRight(V16(BossCMD + 256), 0, 20, 0, 0);
 							break;
 					}
 					sub_1004C54E();
 					sub_10043E24();
-					if ( V16(0x20020618) )
+					if ( SecretFlag1 )
 					{
 						V16(0x2002061C) = 0;
 						V16(0x20020620) = 1;
 					}
-					V16(V32(0x20020614) + 396) = 1;
-					V16(V32(0x20020614) + 166) = 1;
-					V16(V32(0x20020614) + 196) = 0;
+					V16(BossCMD + 396) = 1;
+					V16(BossCMD + 166) = 1;
+					V16(BossCMD + 196) = 0;
 					sub_10098BBE(gDstX + 224, gDstY + 195, 0, 164, 0, 0, 0, 0);
 					sub_10098BBE(gDstX + 174, gDstY + 195, 0, 113, 0, 0, 0, 0);
 					sub_1004E85A(gDstX + 194, gDstY + 180, 0, 0x801D, 0, 0);
 					if ( g_GAME_MODE == 1
-						&& V8(V32(V32(V32(0x20020614) + 484) + 260) + 210) >= 50
-						&& GetJingShuCnt(V32(V32(0x20020614) + 484)) > 0 )
+						&& V8(V32(V32(BossCMD + 484) + 260) + 210) >= 50
+						&& GetJingShuCnt(V32(BossCMD + 484)) > 0 )
 					{
 						sub_10098BBE(gDstX + 254, gDstY + 180, 0, 125, 0, 0, 0, 0);
 					}
@@ -430,7 +430,7 @@ int s1m1f2()
 					sub_1009813C();
 					sub_1002297C();
 					sub_100207F0();
-					sub_100207D8(V32(0x20020614));
+					sub_100207D8(BossCMD);
 					StopPlayerCtrl(1);
 					sub_1007722E(1);
 					sub_1009152C(0);
