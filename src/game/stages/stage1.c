@@ -22,13 +22,13 @@ void s1m1f1()
 	short MapPal;
 	int i;
 	MotionInit();
-	Play_Music_Repeat(WAVE_ST1_M1,104,0);
+	Play_Music_Repeat(WAVE_ST1_M1,104,0);//播放花果山BGM
 	LoadMapBit(0x10187048, 0);//载入地图 0层
 	LoadMapBit(0x10183C10, 1);//载入地图 1层
 	LoadMapMask(0x1019A544, 0, 160);//载入地图的Mask
 	CreatItemBox(0, 1, 375, 168);
 	CreatItemBox(0, 2, 155, 221);
-	MapPal = SetMapBitPal(0x104F2EAC, 0, 0, 0);
+	MapPal = SetMapBitPal(0x104F2EAC);//设置OBJ颜色
 	CreatMapObj(0x1033FB6C,117,0,167,1,MapPal,-2,0,1,7,6);//创建地图用的背景OBJ喷泉那些
 	CreatMapObj(0x1033FB6C,553,0,187,0,MapPal,-2,0,1,7,6);
 	CreatMapObj(0x1033FBC0,820,0,187,0,MapPal,-2,0,1,7,6);
@@ -43,24 +43,24 @@ void s1m1f1()
 	V16(0x20020620) = 0;
 	V8(0x20020628) = 1;	
 
-	FlyBoxOBJ = CreatPicOBJ(0x1033FAA8, 714, 50, 0, 1);
-	ExecPicCMD(FlyBoxOBJ, 0x1033F450);
+	FlyBoxOBJ = CreatPicOBJ(0x1033FAA8, 714, 50, 0, 1);//这里创建了那个飞出来的宝箱
+	ExecPicCMD(FlyBoxOBJ, 0x1033F450);//配置宝箱的脚本脚本
 	V16(FlyBoxOBJ+266) = 1;
 	V16(FlyBoxOBJ+268) = 7;
 	V16(FlyBoxOBJ+270) = 6;
 	MapPal = sub_1004FBE2(FlyBoxOBJ+256, 6, 0, 0);
 	sub_1004FF3C(MapPal, 0, 0);
 	
-	sub_1004F566(0, 8, 512, 248);
+	sub_1004F566(0, 8, 512, 248);//画面范围？
 	sub_100337E0(1, 10);
 	sub_100915BE();
 	sub_100584B2();
-	LoadRoroCMD(0x1033F444, 0);
-	for ( i = 0; i < 15; ++i )
+	LoadRoroCMD(0x1033F444, 0);//载入第一批小兵
+	for ( i = 0; i < 15; ++i )//延时15帧
 		ExecRoroCMD();
-	sub_100BF4F2();
-	sub_1002B94E(60);
-	StopPlayerCtrl(1);	
+	sub_100BF4F2();//画场景标题
+	sub_1002B94E(60);//设置人物的刷新率60?
+	StopPlayerCtrl(1);//这个是是否允许新玩家进入
 	sub_10022584(0);
 	sub_1002297C();
 	sub_1001BDCC();
@@ -89,7 +89,7 @@ int s1m1f2()
 	{
 		switch (MotionState)
 		{
-			case 0:
+			case 0://用80帧显示第一只坐在地上的狼
 			//pgm2log("1");
 				for (i=0;i<80;i++)
 				{
@@ -99,16 +99,15 @@ int s1m1f2()
 				MotionState = 1;
 				return 0;
 			case 1:
-				
-				if (ExecRoroCMD())
+				if (ExecRoroCMD())//判断第一波出兵是否完成
 				{
-					if (GetPlayerCnt()>=3)
-						CreatItemBox(1,3,918,233);
-					LoadRoroCMD(0x1033F444,1);
+					if (GetPlayerCnt()>=3)//如果在场玩家>=3
+						CreatItemBox(1,3,918,233);//创建一个宝箱
+					LoadRoroCMD(0x1033F444,1);//加载第二波兵的脚本
 					for (i=0;i<10;i++)
 						ExecRoroCMD();
-						ScreenUpdate();
-					GoMessage(0,384,150,6,1);
+					ScreenUpdate();
+					GoMessage(0,384,150,6,1);//出现往前走的提示
 					MotionState = 2;
 				}
 				
@@ -239,47 +238,48 @@ int s1m1f2()
 					}
 					ScreenUpdate();
 				}				
-				sub_100BF44C();
+				sub_100BF44C();//这个函数创建了BOSS为悟空，并调用动作1，8
 				for ( i = 0; i < 5; ++i )
 					ScreenUpdate();
 				for ( Player = (ROLE_CMD *)GetPlayerInfo(); Player; Player = (ROLE_CMD *)sub_1002367A(Player) )
 				{
-					v9 = sub_10020FF8(Player, 2, 22);
+					v9 = sub_10020FF8(Player, 2, 22);//这里调用玩家的动作2,22
 					sub_100210EC(Player, v9);
 				}
 				for ( i = 0; i < 100; ++i )
 					ScreenUpdate();
-				sub_10043D3C();
-				Player = (ROLE_CMD *)sub_100BF8AC(8);
+				sub_10043D3C();//这个函数用来为剧情对话做环境初始化
+				Player = (ROLE_CMD *)sub_100BF8AC(8);//检测玩家中是否有唐僧
 				if ( !Player )
-					Player = (ROLE_CMD *)sub_100BF8AC(3);
+					Player = (ROLE_CMD *)sub_100BF8AC(3);//检测玩家中是否有二郎神
 				if ( !Player )
 					Player = (ROLE_CMD *)GetPlayerInfo();
 				switch ( Player->RoleId_1 )
 				{
-					case 8u:
-						ExecDialogRight(V16(BossCMD + 256), 0, 0, 0, 0);
-						ExecDialogLeft(Player->RoleId_1, 0, 1, 0, Player->pRoleInfoRAM);
+					case 8u://如果是唐僧
+						ExecDialogRight(V16(BossCMD + 256), 0, 0, 0, 0);//孙悟空：私闯水帘洞府，秃驴你好大胆子！
+						ExecDialogLeft(Player->RoleId_1, 0, 1, 0, Player->pRoleInfoRAM);//唐三藏：花果山上果然不平静…。佛祖啊，请佑弟子度过危难吧…。
 						break;
-					case 0u:
-					case 1u:
-					case 2u:
-						ExecDialogRight(V16(BossCMD + 256), 0, 17, 0, 0);
+					case 0u://悟空
+					case 1u://八戒
+					case 2u://悟净
+						ExecDialogRight(V16(BossCMD + 256), 0, 17, 0, 0);//孙悟空：哪来的妖孽，赶在花果山放肆
 						break;
-					case 3u:
-						ExecDialogRight(V16(BossCMD + 256), 0, 11, 0, 0);
-						ExecDialogLeft(Player->RoleId_1, 0, 12, 0, Player->pRoleInfoRAM);
-						ExecDialogRight(V16(BossCMD + 256), 0, 13, 0, 0);
+					case 3u://二郎神
+						ExecDialogRight(V16(BossCMD + 256), 0, 11, 0, 0);//孙悟空：这不是杨二郎吗？特地来拜访老孙的？
+						ExecDialogLeft(Player->RoleId_1, 0, 12, 0, Player->pRoleInfoRAM);//二郎神：泼猴我今天有正事要办，快让开！
+						ExecDialogRight(V16(BossCMD + 256), 0, 13, 0, 0);//孙悟空：别这样，先陪我叙叙旧，舒展舒展筋骨吧。
 						break;
-					case 4u:
-					case 5u:
-					case 6u:
-					case 7u:
-					case 9u:
-						ExecDialogRight(V16(BossCMD + 256), 0, 21, 0, 0);
+					case 4u://小龙女
+					case 5u://铁扇
+					case 6u://紫衣
+						
+					case 7u://嫦娥
+					case 9u://蜘蛛精
+						ExecDialogRight(V16(BossCMD + 256), 0, 21, 0, 0);//孙悟空：哪来的姑娘，山里头可是很危险的！快快回去！
 						break;
-					default:
-						ExecDialogRight(V16(BossCMD + 256), 0, 17, 0, 0);
+					default://默认
+						ExecDialogRight(V16(BossCMD + 256), 0, 17, 0, 0);//孙悟空：哪来的妖孽，赶在花果山放肆
 						break;
 				}
 				sub_1004C54E();
