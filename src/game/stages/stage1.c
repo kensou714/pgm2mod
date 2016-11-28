@@ -84,7 +84,7 @@ int s1m1f2()
 	int RoroCMD;
 	int RoroACT;
 	int result;
-	pgm2log("%d",MotionState);
+	//pgm2log("%d",MotionState);
 	if (MotionState < 16)
 	{
 		switch (MotionState)

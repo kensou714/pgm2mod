@@ -195,6 +195,7 @@ void __fastcall DropItemA(__int16 x, __int16 y, __int16 a3, int id, int a5, __in
 void __fastcall DropItemB(__int16 x, __int16 y, __int16 a3, int id, int a5, int a6,int a7,int a8, __int16 a9, __int16 a10)
 {
 	int OBJ; // r4@12
+	pgm2log("Ïä×ÓµôÂä");
 	
 	if ( g_MAIN_FSM != 2 )
 	{
@@ -209,16 +210,16 @@ void __fastcall DropItemB(__int16 x, __int16 y, __int16 a3, int id, int a5, int 
 	}
 	if ( y > gDstY + 224 )
 		y = gDstY + 210;
-	if(id == 214)//type1
-		OBJ =CreatItemObj( x, y, a3, (int)(ItemType1[rand(12)])  , 1, 0, 0, 0);
-	else if(id == 215)//type2
-		OBJ =CreatItemObj( x, y, a3, (int)(ItemType2[rand(12)])  , 1, 0, 0, 0);
-	else if(id == 216)//type3
-		OBJ =CreatItemObj( x, y, a3, (int)(ItemType3[rand(15)])  , 1, 0, 0, 0);
-	else if(id == 217)//type4
-		OBJ =CreatItemObj( x, y, a3,(int)(ItemType4[rand(29)])  , 1, 0, 0, 0);
-	else if(id == 218)//type5
-		OBJ =CreatItemObj( x, y, a3, (V8(0x2005F69C+2)*9)+rand(8)+2 , 1, 0, 0, 0);
+	if(id == 209)//type1
+		OBJ =CreatItemObj( x, y, a3, (int)(ItemType1[rand(12)])  , 1, a5, a6, a7);
+	else if(id == 210)//type2
+		OBJ =CreatItemObj( x, y, a3, (int)(ItemType2[rand(12)])  , 1,a5, a6, a7);
+	else if(id == 211)//type3
+		OBJ =CreatItemObj( x, y, a3, (int)(ItemType3[rand(15)])  , 1, a5, a6, a7);
+	else if(id == 212)//type4
+		OBJ =CreatItemObj( x, y, a3,(int)(ItemType4[rand(29)])  , 1, a5, a6, a7);
+	else if(id == 213)//type5
+		OBJ =CreatItemObj( x, y, a3, (V8(0x2005F69C+2)*9)+rand(8)+2 , 1, a5, a6, a7);
 	else
 		OBJ = CreatItemObj(x, y, a3, id, 1, a5, a6, a7);
 	if ( OBJ )
