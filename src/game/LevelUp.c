@@ -144,7 +144,7 @@ void AddExp(ROLE_RAM *Role, int AddValue,int isAdd)
 					sub_10064C46(Role);
 					//sub_1005B144(Role);//刷新能量和分数显示
 					sub_1005C3F4();
-					sub_1002F288(WAVE_SYS_02,64);//播放音效
+					Play_Voice(WAVE_SYS_02,64);//播放音效
 				}
 			}
 			else
@@ -159,13 +159,13 @@ void AddExp(ROLE_RAM *Role, int AddValue,int isAdd)
 		Role->Lifes =  Role->Lifes + 1;
 		AddLifes = 1;
 		sub_1005D9B4(Role);//刷新生命数显示
-		sub_1002F288(1,64);//播放音效
+		Play_Voice(1,64);//播放音效
 	}
 	if (Role->NowEXP >= 100000000 && AddLifes == 1){//奖第二次命
 		Role->Lifes =  Role->Lifes + 1;
 		AddLifes = 2;
 		sub_1005D9B4(Role);//刷新生命数显示
-		sub_1002F288(1,64);//播放音效
+		Play_Voice(1,64);//播放音效
 	}
 }
 

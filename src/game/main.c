@@ -17,7 +17,7 @@ extern unsigned int __rom_end__[];
 extern unsigned int __ram_start__[];
 extern unsigned int __ram_end__[];
 
-
+extern void TestMain();
 
 
 
@@ -33,7 +33,7 @@ void CopyRight()//版权信息页面
 	DrawLine(6, 4, 42, 1, 0);//画上方红线
 	DrawLine(6, 25, 42, 1, 0);//画下方红线
 	vPrint(9, 6, 0, 0,  "GAME NAME   : ORLEG2(HACK)");
-	vPrint(9, 8, 0, 0,  "BUILD TIME  : %s %s",__DATE__,__TIME__);
+	vPrint(9, 8, 0, 0,  "BUILD TIME  : %s %s",__DATE__,__TIME__);//
 	vPrint(9, 10, 0, 0, "GAME VERSION: V104CN");
 	vPrint(9, 12, 0, 0, "GAME AREA   : %s",AreaName[ubArea_Get()]);
 	vPrint(9, 14, 0, 0, "QQ GROUP    : 499697224");
@@ -48,7 +48,7 @@ void CopyRight()//版权信息页面
 		if (uwInputHold(KEY_P1_A) && uwInputHold(KEY_P1_B))//这里添加了一个按住1P的AB键进入DEBUG_MODE
 		{
 			g_MAIN_FSM = 5;
-			main_menu_mode();
+			TestMain();//main_menu_mode();
 			CopyRight();
 			return;
 		}

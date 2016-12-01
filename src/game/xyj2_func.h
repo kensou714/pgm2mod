@@ -31,7 +31,7 @@
 #define sub_10000370 FUNC16(0x10000370)
 #define SetBankPal FUNC16(0x100003c0)//设置系统字体用的色盘
 #define sub_100003F6 FUNC16(0x100003f6)
-#define sub_1000042C FUNC16(0x1000042c)
+#define SetDialogPal FUNC16(0x1000042c)//设置剧情文本色盘
 #define sub_100004EE FUNC16(0x100004ee)
 #define sub_100005B0 FUNC16(0x100005b0)
 #define sub_100005C4 FUNC16(0x100005c4)
@@ -145,7 +145,7 @@
 #define sub_10004A12 FUNC16(0x10004a12)
 #define sub_10004A82 FUNC16(0x10004a82)
 #define sub_10004B62 FUNC16(0x10004b62)
-#define vPalette_LoadDirect FUNC16(0x10004b6a)
+#define vPalette_LoadDirect FUNC16(0x10004b6a)//这种是不需要淡入显示的
 #define vPalette_LoadDirectFrom FUNC16(0x10004c1c)
 #define vPalette_FadeManage FUNC16(0x10004c72)
 #define vPalette_GrayManage FUNC16(0x10004cdc)
@@ -725,7 +725,7 @@
 #define sub_1002F264 FUNC16(0x1002f264)
 #define Music_Stop FUNC16(0x1002f26c)//Music_Stop
 #define sub_1002F276 FUNC16(0x1002f276)
-#define sub_1002F288 FUNC16(0x1002f288)
+#define Play_Voice FUNC16(0x1002f288)
 #define sub_1002F2DE FUNC16(0x1002f2de)
 #define sub_1002F334 FUNC16(0x1002f334)//Set_Voice_Volume
 #define Voice_Stop FUNC16(0x1002f358)//Voice_Stop
