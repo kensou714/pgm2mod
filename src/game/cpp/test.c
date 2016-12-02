@@ -64,16 +64,24 @@
 */
 
 
+
+void DrawMiniHead(int x,int y,int pal,int headid){
+	vPalette_LoadDirect(0,pal,0x10392E98 + 64*(headid-1));
+	sub_10001794(0,x,y,0x10395800,headid,0,0,pal,2306);
+}
+
+
+
 void RoleSelect(){
-	int i;
+	//int i;
 	int x;
 	int y;
 	int Box_w;
 	int Box_h;
 	x=0;
 	y=0;
-	Box_w=4;
-	Box_h=2;
+	Box_w=3;
+	Box_h=1;
 	sub_1000F0B0();	//这里将图形RAM清空
 	sub_1000EEB2(1,0,0);//一个开关，
 	Snd_Stop_All();//停止所有声音
@@ -115,26 +123,71 @@ void RoleSelect(){
 		sub_1000F106();//清屏
 		sub_1000EEB2(0, 0, 0);//开关
 		SetBankPal();//设置系统字体色盘
-		for(i=0;i<10;i++)
-		{
-			vPalette_LoadDirect(0,5+i,0x10392E98 + 64*i);//设置10个主角头像色盘
-			sub_10001794(0,4+i*5,5,0x10395800,i+1,0,0,5+i,2306);//画出10个主角头像
-		}
-		for(i=0;i<10;i++)
-		{
-			vPalette_LoadDirect(0,15+i,0x10392E98 + 64*(i+10));//设置10个BOSS头像色盘
-			sub_10001794(0,4+i*5,8,0x10395800,i+10+1,0,0,15+i,2306);//画出10个BOSS头像
-		}
-		for(i=0;i<6;i++)
-		{
-			vPalette_LoadDirect(0,25+i,0x10392E98 + 64*(i+20));//设置10个BOSS头像色盘
-			sub_10001794(0,4+i*5,11,0x10395800,i+20+1,0,0,25+i,2306);//画出10个BOSS头像
-		}
+		
+		DrawMiniHead(18+5*0,4+3*0,5,1);//悟空
+		DrawMiniHead(18+5*1,4+3*0,6,2);//八戒
+		DrawMiniHead(18+5*2,4+3*0,7,3);//悟净
+		DrawMiniHead(18+5*3,4+3*0,8,4);//二郎神
+		
+		DrawMiniHead(18+5*0,4+3*1,9 ,5);//小龙女
+		DrawMiniHead(18+5*1,4+3*1,10,6);//铁扇
+		DrawMiniHead(18+5*2,4+3*1,11,7);//紫衣
+		DrawMiniHead(18+5*3,4+3*1,12,8);//嫦娥		
+		
+		DrawMiniHead(18+5*0,4+3*2,13,9 );//唐三藏
+		DrawMiniHead(18+5*1,4+3*2,14,10);//蜘蛛精
+		DrawMiniHead(18+5*2,4+3*2,15,0 );//问号
+		DrawMiniHead(18+5*3,4+3*2,15,0 );//问号
+		
+		DrawMiniHead(18+5*0,4+3*3,16,12);//金角
+		DrawMiniHead(18+5*1,4+3*3,17,13);//银角
+		DrawMiniHead(18+5*2,4+3*3,18,14);//白骨精
+		DrawMiniHead(18+5*3,4+3*3,19,15);//黄袍	
+		
+		DrawMiniHead(18+5*0,4+3*4,20,16);//虎
+		DrawMiniHead(18+5*1,4+3*4,21,17);//羊
+		DrawMiniHead(18+5*2,4+3*4,22,18);//鹿
+		DrawMiniHead(18+5*3,4+3*4,23,19);//金鱼
+
+		DrawMiniHead(18+5*0,4+3*5,24,20);//六耳
+		DrawMiniHead(18+5*1,4+3*5,25,21);//红孩儿
+		DrawMiniHead(18+5*2,4+3*5,26,22);//大鹏
+		DrawMiniHead(18+5*3,4+3*5,27,23);//大象
+
+		DrawMiniHead(18+5*0,4+3*6,28,24);//狮子
+		DrawMiniHead(18+5*1,4+3*6,29,25);//蝎子精
+		DrawMiniHead(18+5*2,4+3*6,30,11);//牛魔王
+		DrawMiniHead(18+5*3,4+3*6,31,26);//黄眉
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		// for(i=0;i<10;i++)
+		// {
+			// vPalette_LoadDirect(0,5+i,0x10392E98 + 64*i);//设置10个主角头像色盘
+			// sub_10001794(0,4+i*5,5,0x10395800,i+1,0,0,5+i,2306);//画出10个主角头像
+		// }
+		// for(i=0;i<10;i++)
+		// {
+			// vPalette_LoadDirect(0,15+i,0x10392E98 + 64*(i+10));//设置10个BOSS头像色盘
+			// sub_10001794(0,4+i*5,8,0x10395800,i+10+1,0,0,15+i,2306);//画出10个BOSS头像
+		// }
+		// for(i=0;i<6;i++)
+		// {
+			// vPalette_LoadDirect(0,25+i,0x10392E98 + 64*(i+20));//设置10个BOSS头像色盘
+			// sub_10001794(0,4+i*5,11,0x10395800,i+20+1,0,0,25+i,2306);//画出10个BOSS头像
+		// }
 
 		
 //		while(1){//进入菜单选择循环
 		
-			sub_10001238(3+x*5, 4+y*3, (int)&Box_w, 1, (int)&Box_h, 1, -1, 1);//把旧框删除
+			sub_10001238(17+x*5, 3+y*3, (int)&Box_w, 1, (int)&Box_h, 1, -1, 0);//把旧框删除
 			if(uwInputKick(KEY_P1_DOWN)){//下
 				if((y==1 && x<6) || y==0)
 					y++;
@@ -157,7 +210,7 @@ void RoleSelect(){
 					x++;
 				Play_Voice(657,112);
 			}
-			sub_10001238(3+x*5, 4+y*3, (int)&Box_w, 1, (int)&Box_h, 1, 0, 1);//显示新框
+			sub_10001238(17+x*5, 3+y*3, (int)&Box_w, 1, (int)&Box_h, 1, -1, 0);//显示新框
 			if(uwInputKick(KEY_P1_START))//开始键
 				break;
 //			ScreenUpdate();//刷新屏幕
