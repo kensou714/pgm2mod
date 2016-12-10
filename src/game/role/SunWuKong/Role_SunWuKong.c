@@ -5,7 +5,7 @@
 */
 
 #include "../../Include/Role.h"
-
+extern InputElem InputTbl_SunWuKong_0[];
 extern ActTypePtrTbl Role_SunWuKong_ActPtrTbl_0;
 extern ActTypePtrTbl Role_SunWuKong_ActPtrTbl_1;
 
@@ -28,7 +28,7 @@ const Role Role_SunWuKong_0={
 
 				0x101EAC60,		//int pPalTbl
 
-	(InputElem*)0x101EB910,		//int pInputTbl
+				InputTbl_SunWuKong_0,//0x101EB910,		//int pInputTbl
 
 				0x10446810,		//int pImageTbl
 
