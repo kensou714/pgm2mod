@@ -36,7 +36,7 @@ void CopyRight()//版权信息页面
 	vPrint(9, 8, 0, 0,  "BUILD TIME  : %s %s",__DATE__,__TIME__);//
 	vPrint(9, 10, 0, 0, "GAME VERSION: V104CN");
 	vPrint(9, 12, 0, 0, "GAME AREA   : %s",AreaName[ubArea_Get()]);
-	vPrint(9, 14, 0, 0, "QQ GROUP    : 598132109");
+	vPrint(9, 14, 0, 0, "QQ GROUP    : %d",598132109);
 	vPrint(9, 16, 0, 0, "NEWS WEB    : HTTP://BBS.MYCOM.NET.CN/");
 	vPrint(8, 21, 0, 0, "THANKS TO ALL THE PEOPLE WHO HAVE ");
 	vPrint(10, 23, 0, 0, "CONTRIBUTED TO THE PGM2 SIMULATION.");
